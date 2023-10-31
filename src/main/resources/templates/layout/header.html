@@ -16,48 +16,80 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <style>
-        .custom-bg-green {
-            background-color: lightgreen;
-        }
+        .custom-navbar-color {
+        	background-color: rgb(128, 255, 255); /* Màu mong muốn */
+    	}  
+    	.dropdown-menu {
+			border: 2px solid rgb(0, 0, 160); /* Màu viền */
+        	border-radius: 5px; /* Bán kính bo góc */
+        	padding: 10px; /* Khoảng cách giữa nội dung và viền */
+        	border-radius: 10px
+		}
+	 	.nav-link:hover {
+			color: rgb(255, 0, 0); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+		}
+		
     </style>
 </head>
 <body>
 <!-- Header trong Thymeleaf phải thêm <header><> trong file header.html -->
-    <header class="navbar navbar-expand-lg navbar-light bg-success">
-        <a class="navbar-brand" href="#" th:href="@{/aboutus}">Booktopia</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" th:href="@{/}">Trang chủ <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/viewbooks}">Sản phẩm</a>
-                </li>
-                <li class="nav-item" th:if="${session.account != null}">
-                    <a class="nav-link" th:href="@{/viewcart}">Giỏ hàng</a>
-                </li>
-                <li class="nav-item" th:if="${session.account != null}">
-                    <a class="nav-link" th:href="@{/vieworders}">Đơn hàng</a>
-                </li>
-                <li class="nav-item" th:if="${session.account != null}">
-                    <a class="nav-link" th:href="@{/viewaccount}">Chào <span th:text="${session.account['firstName']}"></span></a>
-                </li>
-                <li class="nav-item" th:if="${session.account != null}">
-                    <a class="nav-link" th:href="@{/customer/logoutaccount}">Đăng xuất</a>
-                </li>
-                <li class="nav-item" th:unless="${session.account != null}">
-                    <a class="nav-link" th:href="@{/customer/loginaccount}">Đăng nhập</a>
-                </li>
-                <li class="nav-item" th:unless="${session.account != null}">
-                    <a class="nav-link" th:href="@{/customer/registeraccount}">Đăng ký</a>
-                </li>
-            </ul>
-        </div>
+
+    <header class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%;">
+		<div class="fhs_header_desktop" style="width: 100%;">
+			<div class="fhs-header-top-banner" >
+				<div class="top-banner-block" style="display: flex; justify-content: center;">
+					<p style="text-align: center;">
+						<a href="https://www.fahasa.com/sale-thu-3?fhs_campaign=topbanner" style="display: flex; justify-content: center;">
+							<img class="responsive-image" src="https://res.cloudinary.com/dylwewmt0/image/upload/v1698771232/PHOTO_LIST/Header/Header.jpg" alt>
+						</a>
+					</p>
+				</div>
+			</div>
+			<div class="container" >
+		        <a class="navbar-brand" href="#" th:href="@{/aboutus}">
+					Booktopia
+				</a>
+		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+		            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+		        <div class="collapse navbar-collapse" id="navbarNav">
+					<!--"mr-auto" sẽ đẩy các phần tử ra xa bên trái nhất có thể-->
+		            <ul class="navbar-nav mr-auto">
+		                <li class="nav-item active">
+		                    <a class="nav-link" href="#" th:href="@{/}">Trang chủ <span
+		                            class="sr-only">(current)</span></a>
+		                </li>
+		                <li class="nav-item">
+		                    <a class="nav-link" th:href="@{/viewbooks}">Sản phẩm</a>
+		                </li>
+		                <li class="nav-item" th:if="${session.account != null}">
+		                    <a class="nav-link" th:href="@{/viewcart}">Giỏ hàng</a>
+		                </li>
+		                <li class="nav-item" th:if="${session.account != null}">
+		                    <a class="nav-link" th:href="@{/vieworders}">Đơn hàng</a>
+		                </li>
+		                
+		            </ul>
+		            <ul class="navbar-nav">
+						<li class="nav-item" th:if="${session.account != null}">
+		                    <a class="nav-link" th:href="@{/viewaccount}"> <span th:text="${session.account['firstName']}  + ' ' + ${session.account['lastName']}"></span></a>
+		                </li>
+				        <li class="nav-item dropdown">
+				            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				                Tài khoản
+				            </a>
+				            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				                <a class="dropdown-item" th:if="${session.account != null}" th:href="@{/customer/logoutaccount}">Đăng xuất</a>
+				                <a class="dropdown-item" th:unless="${session.account != null}" th:href="@{/customer/loginaccount}">Đăng nhập</a>
+				                <a class="dropdown-item" th:unless="${session.account != null}" th:href="@{/customer/registeraccount}">Đăng ký</a>
+
+				            </div>
+				        </li>
+		    		</ul>
+		        </div>
+			</div>
+		</div>
     </header>
 </body>
 </html>

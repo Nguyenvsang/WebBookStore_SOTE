@@ -6,6 +6,23 @@
     <title>Đăng nhập</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+          
+    <style>
+    .form-container {
+        border: 2px solid rgb(182,232,241);
+        border-radius: 5px;
+        padding: 20px;
+        border-radius: 15px
+	}
+	.btn-login {
+		background-color: rgb(2,88,155);
+		border-radius: 10px;
+		color: white;
+	}
+	.btn-login:hover {
+			color:rgb(182,232,241); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+		}
+	</style>
 </head>
 <body>
 <div th:replace="~{layout/header :: header}"></div>
@@ -20,19 +37,21 @@
 			    <span th:text="${param.message}"></span>
 			</div>
             
-            <form th:action="@{/customer/loginaccount}" method="post">
-                <div class="form-group">
-                    <label for="username">Tên đăng nhập:</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu:</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                </div>
-            </form>
+            <div class="form-container">
+	            <form th:action="@{/customer/loginaccount}" method="post">
+	                <div class="form-group">
+	                    <label for="username">Tên đăng nhập:</label>
+	                    <input type="text" class="form-control" id="username" name="username" required>
+	                </div>
+	                <div class="form-group">
+	                    <label for="password">Mật khẩu:</label>
+	                    <input type="password" class="form-control" id="password" name="password" required>
+	                </div>
+	                <div class="text-center">
+	                    <button type="submit" class="btn btn-login">Đăng nhập</button>
+	                </div>
+	            </form>
+            </div>
         </div>
     </div>
 </div>
