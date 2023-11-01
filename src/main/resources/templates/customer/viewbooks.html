@@ -97,13 +97,20 @@
 			border: 2px solid rgb(182,232,241);
 			border-radius: 10px
 		}
+		
+		h3 {
+        	text-align: center;
+        	margin-top: 20px;
+        	margin-bottom: 20px;  
+        	color: rgb(2,88,155);     	
+    	}
 	</style>
 </head>
 <body>
 <div th:replace="~{layout/header :: header}"></div>
 <div class="container">
 	<div class="frame">
-	    <h2 style="font-family:'Arial'">Mời bạn xem qua</h2>
+	    <h3 style="font-family:'Arial'">Hãy bắt đầu khám phá</h3>
 	    
 	    <div style="display: flex; justify-content: center;">
 		    <form class="form-inline my-2 my-lg-0" th:action="@{/viewbooks}" method="GET" style="display: flex;">

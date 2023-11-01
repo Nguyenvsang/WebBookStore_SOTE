@@ -38,6 +38,10 @@
 		.btn-no:hover {
 			color:rgb(2,88,155); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
 		}
+		.card-title {
+			color: rgb(2,88,155);
+		}
+		
 	</style>
 </head>
 <body>
@@ -46,7 +50,7 @@
     <div class="container d-flex align-items-center justify-content-center vh-100">
         <div class="card text-center">
             <div class="card-body">
-                <h3 class="card-title">Bạn có muốn đăng xuất?</h3>
+                <h3 class="card-title">BẠN CÓ MUỐN ĐĂNG XUẤT KHÔNG?</h3>
                 <form th:action="@{/customer/logoutaccount}" method="post">
                     <button type="submit" class="btn btn-logout">Đăng xuất</button>
                     <a th:href="@{/}" class="btn btn-no">Không</a>

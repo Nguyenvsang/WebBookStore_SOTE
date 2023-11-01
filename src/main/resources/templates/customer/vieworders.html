@@ -9,7 +9,8 @@
     	h3 {
         	text-align: center;
         	margin-top: 20px;
-        	margin-bottom: 20px;       	
+        	margin-bottom: 20px;  
+        	color: rgb(2,88,155);     	
     	}
     	
     	.table {
@@ -22,12 +23,21 @@
         	margin-bottom: 50px;
         	border-radius: 15px
 		}
+		.btn-detail {
+			background-color: rgb(2,88,155);
+			border-radius: 10px;
+			color: white;
+			display: center;
+		}
+		.btn-detail:hover {
+			color: rgb(182,232,241)
+		}
 	</style>
 </head>
 <body>
 	<div th:replace="~{layout/header :: header}"></div>
     <div class="container">
-        <h3>Xem danh sách đơn hàng</h3>
+        <h3>DANH SÁCH ĐƠN HÀNG</h3>
         
         <div class="container-body">
 	        <table class="table table-striped table-bordered">
@@ -65,7 +75,7 @@
 	                    <td th:text="${order.phoneNumber}"></td>
 	                    <td th:text="${order.email}"></td>
 	                    <td>
-	                        <a th:href="@{/vieworderitems(orderId=${order.id})}" class="btn btn-primary">Xem chi tiết</a>
+	                        <a th:href="@{/vieworderitems(orderId=${order.id})}" class="btn btn-detail">Xem chi tiết</a>
 	                    </td>
 	                </tr>
 	            </tbody>
