@@ -16,49 +16,53 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
     <style>
-        .custom-bg-red {
-            background-color: red;
-        }
+        
     </style>
 </head>
 <body>
 	<!-- Header trong Thymeleaf phải thêm <header><> trong file header.html -->
-    <header class="navbar navbar-expand-lg navbar-light bg-danger">
-        <a class="navbar-brand" th:href="@{/aboutusadmin}">Booktopia Admin</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!-- Hiển thị "Username" và "Đăng xuất" và "Giỏ hàng" và "Đơn hàng" -->
-                <li class="nav-item active" th:if="${session.admin != null}">
-                    <a class="nav-link" th:href="@{/admin}">Trang chủ <span
-                            class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link" th:href="@{/managebooks}">Sản phẩm</a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link" th:href="@{/managecategories}">Danh mục</a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link" th:href="@{/manageorders}">Đơn hàng</a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link" href="#">Chào
-                        <span th:text="${session.admin['firstName']}"></span>
-                    </a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link" th:href="@{/manageaccounts}">Tài khoản</a>
-                </li>
-                <li class="nav-item" th:if="${session.admin != null}">
-                    <a class="nav-link"
-                        th:href="@{/logoutadmin}">Đăng xuất</a>
-                </li>
-            </ul>
-        </div>
+    <header class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container" >
+	        <a class="navbar-brand" th:href="@{/aboutusadmin}">Knowledge Young</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+	            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarNav">
+	            <ul class="navbar-nav mr-auto">
+	                <!-- Hiển thị "Username" và "Đăng xuất" và "Giỏ hàng" và "Đơn hàng" -->
+	                <li class="nav-item active" th:if="${session.admin != null}">
+	                    <a class="nav-link" th:href="@{/admin}" style="color:rgb(184,1,1)">Trang chủ <span
+	                            class="sr-only">(current)</span></a>
+	                </li>
+	                <li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link" th:href="@{/managebooks}" style="color:rgb(184,1,1)">Sản phẩm</a>
+	                </li>
+	                <li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link" th:href="@{/managecategories}" style="color:rgb(184,1,1)">Danh mục</a>
+	                </li>
+	                <li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link" th:href="@{/manageorders}" style="color:rgb(184,1,1)">Đơn hàng</a>
+	                </li>
+	                
+	                <li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link" th:href="@{/manageaccounts}" style="color:rgb(184,1,1)">Tài khoản</a>
+	                </li>
+	                
+	            </ul>
+	            <ul class="navbar-nav">
+					<li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link" href="#" style="color:rgb(184,1,1)">
+	                        <span th:text="${session.admin['firstName']}  + ' ' + ${session.admin['lastName']}"></span>
+	                    </a>
+	                </li>
+	                <li class="nav-item" th:if="${session.admin != null}">
+	                    <a class="nav-link"
+	                        th:href="@{/logoutadmin}" style="color:rgb(184,1,1)">Đăng xuất</a>
+	                </li>
+	            </ul>
+	        </div>
+		</div>
     </header>
 </body>
 </html>

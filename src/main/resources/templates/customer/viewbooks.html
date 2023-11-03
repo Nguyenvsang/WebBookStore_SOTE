@@ -104,13 +104,23 @@
         	margin-bottom: 20px;  
         	color: rgb(2,88,155);     	
     	}
+		.page-link {
+			border: 1px solid rgb(182,232,241);
+		}
+		
+		.frame-number {
+			display: flex;
+    		justify-content: center;
+			border-radius: 20px
+		}
+		
 	</style>
 </head>
 <body>
 <div th:replace="~{layout/header :: header}"></div>
 <div class="container">
 	<div class="frame">
-	    <h3 style="font-family:'Arial'">Hãy bắt đầu khám phá</h3>
+	    <h3 style="font-family:'Arial'">HÃY BẮT ĐẦU KHÁM PHÁ</h3>
 	    
 	    <div style="display: flex; justify-content: center;">
 		    <form class="form-inline my-2 my-lg-0" th:action="@{/viewbooks}" method="GET" style="display: flex;">
@@ -169,28 +179,32 @@
 	     <div class="row">
 		</div>
 	
-	    <div th:if="${totalPages > 1}">
-	        <ul class="pagination">
-	            <li th:if="${currentPage > 1}" class="page-item">
-	                <a class="page-link" th:href="@{/viewbooks(page=${currentPage - 1})}">Trước</a>
-	            </li>
-	
-	            <th:block th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
-	                <li class="page-item" th:classappend="${pageNumber == currentPage ? 'active' : ''}">
-	                    <th:block th:if="${pageNumber == currentPage}">
-	                        <span class="page-link" th:text="${pageNumber}"></span>
-	                    </th:block>
-	                    <th:block th:unless="${pageNumber == currentPage}">
-	                        <a class="page-link" th:href="@{/viewbooks(page=${pageNumber})}" th:text="${pageNumber}"></a>
-	                    </th:block>
-	               <!---->
-	            </th:block>
-	
-	            <li th:if="${currentPage < totalPages}" class="page-item">
-	                <a class="page-link" th:href="@{/viewbooks(page=${currentPage + 1})}">Sau</a>
-	            </li>
-	        </ul>
-	    </div>
+		<div class="frame-number">
+		    <div th:if="${totalPages > 1}">
+		        <ul class="pagination">
+					<div class="row">
+			            <li th:if="${currentPage > 1}" class="page-item">
+			                <a class="page-link" th:href="@{/viewbooks(page=${currentPage - 1})}">Trước</a>
+			            </li>
+			
+			            <th:block th:each="pageNumber : ${#numbers.sequence(1, totalPages)}">
+			                <li class="page-item" th:classappend="${pageNumber == currentPage ? 'active' : ''}">
+			                    <th:block th:if="${pageNumber == currentPage}">
+			                        <span class="page-link" th:text="${pageNumber}"></span>
+			                    </th:block>
+			                    <th:block th:unless="${pageNumber == currentPage}">
+			                        <a class="page-link" th:href="@{/viewbooks(page=${pageNumber})}" th:text="${pageNumber}"></a>
+			                    </th:block>
+			               <!---->
+			            </th:block>
+			
+			            <li th:if="${currentPage < totalPages}" class="page-item">
+			                <a class="page-link" th:href="@{/viewbooks(page=${currentPage + 1})}">Sau</a>
+			            </li>
+					</div>
+		        </ul>
+		    </div>
+		</div>
 	</div>
 </div>
 
