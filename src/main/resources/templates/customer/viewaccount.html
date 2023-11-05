@@ -17,6 +17,8 @@
 		h3 {
         	text-align: center;
         	margin-top: 20px;
+        	margin-bottom: 20px; 
+        	color: rgb(2,88,155);   	
     	}
     	.btn-edit-info {
 			background-color: rgb(2,88,155);
@@ -53,7 +55,7 @@
 <body>
 	<div th:replace="~{layout/header :: header}"></div>
     <div class="container">
-        <h3>Thông tin cá nhân</h3>
+        <h3>THÔNG TIN CÁ NHÂN</h3>
         
 		<!-- Hiển thị thông báo nếu có -->
         <div th:if="${param.message}" class="alert"

@@ -8,7 +8,9 @@
 		h3 {
         	text-align: center;
         	margin-top: 20px;
-    	}
+        	margin-bottom: 20px; 
+        	color: rgb(2,88,155);   	
+    	}    	
     	.container-body {
         	border: 2px solid rgb(182,232,241);
         	padding: 20px;
@@ -51,7 +53,7 @@
 <body>
 	<div th:replace="~{layout/header :: header}"></div>
     <div class="container">
-        <h3>Nhập thông tin cần sửa</h3>
+        <h3>NHẬP THÔNG TIN CẦN CHỈNH SỬA</h3>
 
         <!-- Hiển thị thông báo nếu có -->
         <div th:if="${message}" class="alert"
