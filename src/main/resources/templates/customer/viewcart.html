@@ -136,7 +136,7 @@
 				                            </div>
 										</div>
 										<div class="col">
-				                             <input type="text-center align-middle" class="form-control" th:value="${cartItem.quantity}" th:id="'quantity_' + ${cartItem.id}" readonly>
+				                             <input style="border: 1px solid rgb(2,88,155);" type="text-center align-middle" class="form-control" th:value="${cartItem.quantity}" th:id="'quantity_' + ${cartItem.id}" readonly>
 										</div>
 										<div class="col-increase">
 				                            <div class="input-group">
@@ -159,7 +159,7 @@
         <div class="container">
 	        <div class="text-right" th:if="${totalAmount != null}">
 			    <h4>Tổng số tiền (vnd)</h4>
-			    <h4 id="totalpricecart" th:text="${totalAmount}"></h4>
+			    <h4 id="totalpricecart" th:text="${totalAmount}" style="color: orangered"></h4>
 			    <a th:href="@{/shippinginformation(totalAmount=${totalAmount})}" class="btn btn-purchase">Mua hàng</a>
 			</div>
         </div>

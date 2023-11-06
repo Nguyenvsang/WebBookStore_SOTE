@@ -4,20 +4,56 @@
     <meta charset="UTF-8">
     <title>Đăng xuất</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+		.card-body {
+			border: 2px solid rgb(255, 255, 255);
+	        border-radius: 5px;
+	        padding: 20px;
+	        border-radius: 15px		
+	    }
+	    .text-center {
+			border: 2px solid rgb(182,232,241);
+	        border-radius: 5px;
+	        padding: 20px;
+	        border-radius: 15px	
+		}
+		.btn-logout {
+			border-radius: 10px;
+			background-color: rgb(2,88,155);
+			border: 2px solid rgb(2,88,155);	
+			color: white;		
+		}
+		.btn-logout:hover {
+			color:rgb(182,232,241); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+		}
+		.btn-no {
+			border-radius: 10px;
+			color: black;
+			background-color: white;
+			border: 2px solid rgb(2,88,155);			
+		}
+		.btn-no:hover {
+			color:rgb(2,88,155); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+		}
+		.card-title {
+			color: rgb(2,88,155);
+		}
+		
+	</style>
 </head>
 <body>
 <div th:replace="~{admin/headeradmin :: header}"></div>
-<div class="container d-flex align-items-center justify-content-center vh-100">
-    <div class="card text-center">
-        <div class="card-body">
-            <h3 class="card-title">Bạn có muốn đăng xuất?</h3>
-            <form th:action="@{/logoutadmin}" method="post">
-                <button type="submit" class="btn btn-danger">Đăng xuất</button>
-                <a th:href="@{/admin}" class="btn btn-secondary">Không</a>
-            </form>
+	<div class="container d-flex align-items-center justify-content-center vh-100">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title">BẠN CÓ MUỐN ĐĂNG XUẤT KHÔNG?</h3>
+                <form th:action="@{/logoutadmin}" method="post">
+                    <button type="submit" class="btn btn-logout">Đăng xuất</button>
+                    <a th:href="@{/admin}" class="btn btn-no">Không</a>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <div th:replace="~{admin/footeradmin :: footer}"></div>

@@ -23,6 +23,7 @@
 			color: white;
 			display: center;
 			margin: 30px 30px;
+			text-align: left;
 		}
 		.btn-back:hover {
 			color: rgb(182,232,241)
@@ -94,7 +95,7 @@
 		            <tr>
 		                <td th:text="${order.id}" class="align-middle text-center"></td>
 		                <td th:text="${#dates.format(order.dateOrder, 'dd/MM/yyyy')}" class="align-middle text-center"></td>
-		                <td th:text="${order.totalPrice}" class="align-middle text-center"></td>
+		                <td th:text="${order.totalPrice}" class="align-middle text-center" style="color: orangered"></td>
 		                <td class="align-middle text-center">
 			                <span th:classappend="${order.status == 0} ? 'badge badge-success' : (${order.status == 1} ? 'badge badge-info' : (${order.status == 2} ? 'badge badge-primary' : (${order.status == 3} ? 'badge badge-secondary' : '')))" class="align-middle text-center">
 			                    <span th:switch="${order.status}" >
