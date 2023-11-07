@@ -36,12 +36,13 @@
 	}
 	
 	.btn-outline-search {
-		background-color: rgb(2,88,155);
-		border-radius: 10px;
-		color: white;
+			border-radius: 10px;
+			color: black;
+			background-color: white;
+			border: 2px solid rgb(2,88,155);			
 	}
 	.btn-outline-search:hover {
-			color:rgb(182,232,241); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
+			color:rgb(2,88,155); /* Thay đổi màu văn bản khi trỏ chuột vào nút */
 	}
 	
 	.btn-detail {
@@ -143,7 +144,9 @@
 		            <th:block th:each="book : ${books}">
 		                <tr>
 		                	<td class="align-middle text-center" th:text="${book.id}"></td>
-		                    <td class="align-middle text-center"><img th:src="${book.img + '1'}" alt="Book Image" style="max-height: 100px;"></td>
+		                    <td class="align-middle text-center">
+								<img th:src="${book.img + '1'}" alt="Book Image" style="max-height: 100px;">
+							</td>
 		                    <td class="align-middle text-center" th:text="${book.name}"></td>
 		                    <td class="align-middle text-center" th:text="${book.author}"></td>
 		                    <td class="align-middle text-center" th:text="${book.price} + ' vnd'"></td>
