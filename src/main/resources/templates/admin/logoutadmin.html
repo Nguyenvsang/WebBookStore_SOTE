@@ -12,7 +12,6 @@
 	        border-radius: 15px		
 	    }
 	    .text-center {
-			border: 2px solid rgb(182,232,241);
 	        border-radius: 5px;
 	        padding: 20px;
 	        border-radius: 15px	
@@ -38,24 +37,29 @@
 		.card-title {
 			color: rgb(2,88,155);
 		}
-		
+		.frame {
+			border: 2px rgb(182,232,241);
+		}
 	</style>
 </head>
-<body>
 <div th:replace="~{admin/headeradmin :: header}"></div>
-	<div class="container d-flex align-items-center justify-content-center vh-100">
-        <div class="card text-center">
-            <div class="card-body">
-                <h3 class="card-title">BẠN CÓ MUỐN ĐĂNG XUẤT KHÔNG?</h3>
-                <form th:action="@{/logoutadmin}" method="post">
-                    <button type="submit" class="btn btn-logout">Đăng xuất</button>
-                    <a th:href="@{/admin}" class="btn btn-no">Không</a>
-                </form>
-            </div>
-        </div>
-    </div>
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<div th:replace="~{admin/footeradmin :: footer}"></div>
-</body>
+	<body>
+		<div class="container d-flex align-items-center justify-content-center vh-100">
+			<div class="frame">
+		        <div class="card text-center">
+		            <div class="card-body">
+		                <h3 class="card-title">BẠN CÓ MUỐN ĐĂNG XUẤT KHÔNG?</h3>
+		                <form th:action="@{/logoutadmin}" method="post">
+		                    <button type="submit" class="btn btn-logout">Đăng xuất</button>
+		                    <a th:href="@{/admin}" class="btn btn-no">Không</a>
+		                </form>
+		            </div>
+		        </div>
+			</div>
+	    </div>
+	
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	</body>
+	<div th:replace="~{admin/footeradmin :: footer}"></div>
 </html>
