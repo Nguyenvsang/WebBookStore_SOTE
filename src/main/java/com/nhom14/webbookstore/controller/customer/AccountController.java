@@ -186,6 +186,7 @@ public class AccountController {
 	    Account updateAccount = sessionAccount;
 	    try {
 	        if (!image.isEmpty()) {
+	        	
 	        	// Tạo public ID cho hình ảnh trên Cloudinary (sử dụng id người dùng)
                 String publicId = "WebBookStore/img_account/account_" + updateAccount.getId();
 
@@ -194,6 +195,13 @@ public class AccountController {
 
                 // Cập nhật URL hình ảnh vào tài khoản
                 updateAccount.setImg(imageUrl);
+	        }
+	        
+	        // Kiểm tra số điện thoại
+	        String phoneNumber = accountParam.getPhoneNumber();
+	        if (!phoneNumber.matches("\\d+")) {
+	            redirectAttributes.addAttribute("message", "Chỉ nhập số vào trường số điện thoại!");
+	            return "redirect:/viewaccount";
 	        }
 
 	        // Cập nhật thông tin tài khoản
@@ -255,10 +263,29 @@ public class AccountController {
 	        return "redirect:/changepassword";
 	    }
 	    
+	    
 	    // Kiểm tra mật khẩu mới và mật khẩu nhập lại
 	    if (!newPassword.equals(confirmPassword)) {
 	        // Hiển thị thông báo mật khẩu nhập lại không khớp
 	    	redirectAttributes.addAttribute("message", "Mật khẩu nhập lại không khớp. Vui lòng thử lại.");
+	        return "redirect:/changepassword";
+	    }
+	    
+	    if(!(newPassword.length() >= 8 
+	            && newPassword.matches(".*[A-Z].*") 
+	            && newPassword.matches(".*[a-z].*") 
+	            && newPassword.matches(".*\\d.*") 
+	            && newPassword.matches(".*\\W.*"))) {
+		    	// Hiển thị thông báo khi mật khẩu yếu
+		    	redirectAttributes.addAttribute("message", "Mật khẩu không đủ mạnh! Mật khẩu mới phải có ít nhất 8 ký tự và"
+		    			+ "chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.");
+		        return "redirect:/changepassword";
+		    }
+	    
+	    // Kiểm tra mật khẩu mới có giống mật khẩu hiện tại không
+	    if (!BCrypt.checkpw(newPassword, account.getPassword())) {
+	        // Hiển thị thông báo giống mật khẩu cũ
+	    	redirectAttributes.addAttribute("message", "Vui lòng chọn mật khẩu khác mật khẩu cũ!");
 	        return "redirect:/changepassword";
 	    }
 	    
