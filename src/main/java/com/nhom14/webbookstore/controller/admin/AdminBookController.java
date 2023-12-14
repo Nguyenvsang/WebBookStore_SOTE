@@ -183,42 +183,51 @@ public class AdminBookController {
 	    newBook.setDescription(bookParam.getDescription());
 	    newBook.setStatus(bookParam.getStatus());
 	    newBook.setDetail(bookParam.getDetail());
-	    newBook.setQuantity(bookParam.getQuantity());
+	    newBook.setQuantity(bookParam.getQuantity());    
 	    
 	    try {
 	    	if (!image1.isEmpty()&&!image2.isEmpty()&&!image3.isEmpty()&&!image4.isEmpty()) {
-	    		// Add book để lấy được id thêm vào trong ảnh
-	    		newBook.setImg("");
-	    		bookService.addBook(newBook);
-	    		newBook = bookService.getLastBook();
-	        	// Tạo public ID cho hình ảnh trên Cloudinary (sử dụng id sach)
-                String publicId1 = "WebBookStore/img_book/book_" + newBook.getId() + "/1";
+	    		
+	    		// Kiểm tra định dạng hình ảnh
+	            if (isImageFormatValid(image1) && isImageFormatValid(image2) && isImageFormatValid(image3) && isImageFormatValid(image4)) {
+	            	// Add book để lấy được id thêm vào trong ảnh
+		    		newBook.setImg("");
+		    		bookService.addBook(newBook);
+		    		newBook = bookService.getLastBook();
+		        	// Tạo public ID cho hình ảnh trên Cloudinary (sử dụng id sach)
+	                String publicId1 = "WebBookStore/img_book/book_" + newBook.getId() + "/1";
 
-                // Tải lên hình ảnh lên Cloudinary và lấy URL
-                String imageUrl1 = cloudinaryService.uploadImage(image1, publicId1);
+	                // Tải lên hình ảnh lên Cloudinary và lấy URL
+	                String imageUrl1 = cloudinaryService.uploadImage(image1, publicId1);
 
-                // Lấy đường dẫn URL mà bỏ kí tự sau dấu / cuối cùng
-                int lastSlashIndex = imageUrl1.lastIndexOf("/");
-                String imageUrl1WithoutTrailingContent = imageUrl1.substring(0, lastSlashIndex + 1);
-                
-                // Cập nhật URL hình ảnh vào tài khoản
-                newBook.setImg(imageUrl1WithoutTrailingContent);
-                
-                // Tạo public ID và tải 3 hình ảnh còn lại lên Cloudinary
-                String publicId2 = "WebBookStore/img_book/book_" + newBook.getId() + "/2";
-                String imageUrl2 = cloudinaryService.uploadImage(image2, publicId2);
-                
-                String publicId3 = "WebBookStore/img_book/book_" + newBook.getId() + "/3";
-                String imageUrl3 = cloudinaryService.uploadImage(image3, publicId3);
-                
-                String publicId4 = "WebBookStore/img_book/book_" + newBook.getId() + "/4";
-                String imageUrl4 = cloudinaryService.uploadImage(image4, publicId4);
+	                // Lấy đường dẫn URL mà bỏ kí tự sau dấu / cuối cùng
+	                int lastSlashIndex = imageUrl1.lastIndexOf("/");
+	                String imageUrl1WithoutTrailingContent = imageUrl1.substring(0, lastSlashIndex + 1);
+	                
+	                // Cập nhật URL hình ảnh vào tài khoản
+	                newBook.setImg(imageUrl1WithoutTrailingContent);
+	                
+	                // Tạo public ID và tải 3 hình ảnh còn lại lên Cloudinary
+	                String publicId2 = "WebBookStore/img_book/book_" + newBook.getId() + "/2";
+	                String imageUrl2 = cloudinaryService.uploadImage(image2, publicId2);
+	                
+	                String publicId3 = "WebBookStore/img_book/book_" + newBook.getId() + "/3";
+	                String imageUrl3 = cloudinaryService.uploadImage(image3, publicId3);
+	                
+	                String publicId4 = "WebBookStore/img_book/book_" + newBook.getId() + "/4";
+	                String imageUrl4 = cloudinaryService.uploadImage(image4, publicId4);
+	            }
+	            else {
+	                redirectAttributes.addAttribute("message", "Định dạng hình ảnh không hợp lệ. Vui lòng chọn hình ảnh có định dạng PNG hoặc JPG.");
+	                return "redirect:/addbook";
+	            }
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();
 	        redirectAttributes.addAttribute("message", "Đã xảy ra lỗi khi thêm sách.");
 	        return "redirect:/addbook";
 		}
+	    
 	    
 	    // Kiểm tra trường hợp số lượng bằng 0 sẽ đưa về ngừng kinh doanh
         if (newBook.getQuantity() == 0) {
@@ -231,6 +240,13 @@ public class AdminBookController {
         redirectAttributes.addAttribute("message", "Đã thêm sách thành công!");
         return "redirect:/addbook";
 	}
+	
+	// Phương thức kiểm tra định dạng hình ảnh
+    public boolean isImageFormatValid(MultipartFile image) {
+        String contentType = image.getContentType();
+        return contentType.equals("image/png") || contentType.equals("image/jpeg");
+    }
+    
 	
 	@GetMapping("/managedetailbook")
 	public String manageDetailBook(@RequestParam("bookId") Integer bookId, 
