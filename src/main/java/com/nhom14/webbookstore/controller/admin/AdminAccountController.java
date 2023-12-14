@@ -178,6 +178,9 @@ public class AdminAccountController {
         
         // Lưu thông tin tài khoản vào model
         model.addAttribute("account", account);
+        // Dùng sửa lỗi ảnh quá lớn 
+        session.setAttribute("acc_fix_img", account);
+        
         // Sinh giá trị ngẫu nhiên
         Random random = new Random();
         int randomNumber = random.nextInt();
@@ -290,14 +293,32 @@ public class AdminAccountController {
 	    if (!BCrypt.checkpw(currentPassword, account.getPassword())) {
 	        // Hiển thị thông báo mật khẩu hiện tại không đúng
 	    	redirectAttributes.addAttribute("message", "Mật khẩu hiện tại không đúng. Vui lòng thử lại.");
-	        return "redirect:/managechangepassword";
+	    	return "redirect:/managechangepassword?accountId=" + account.getId();
+	    }
+	    
+	    // Kiểm tra mật khẩu mới có giống mật khẩu hiện tại không
+	    if (BCrypt.checkpw(newPassword, account.getPassword())) {
+	        // Hiển thị thông báo giống mật khẩu cũ
+	    	redirectAttributes.addAttribute("message", "Vui lòng chọn mật khẩu khác mật khẩu cũ!");
+	    	return "redirect:/managechangepassword?accountId=" + account.getId();
+	    }
+	    
+	    if(!(newPassword.length() >= 8 
+            && newPassword.matches(".*[A-Z].*") 
+            && newPassword.matches(".*[a-z].*") 
+            && newPassword.matches(".*\\d.*") 
+            && newPassword.matches(".*\\W.*"))) {
+	    	// Hiển thị thông báo khi mật khẩu yếu
+	    	redirectAttributes.addAttribute("message", "Mật khẩu không đủ mạnh! Mật khẩu mới phải có ít nhất 8 ký tự và"
+	    			+ "chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt.");
+	        return "redirect:/managechangepassword?accountId=" + account.getId();
 	    }
 	    
 	    // Kiểm tra mật khẩu mới và mật khẩu nhập lại
 	    if (!newPassword.equals(confirmPassword)) {
 	        // Hiển thị thông báo mật khẩu nhập lại không khớp
 	    	redirectAttributes.addAttribute("message", "Mật khẩu nhập lại không khớp. Vui lòng thử lại.");
-	        return "redirect:/managechangepassword";
+	        return "redirect:/managechangepassword?accountId=" + account.getId();
 	    }
 	    
 	    // Băm mật khẩu mới sử dụng bcrypt
