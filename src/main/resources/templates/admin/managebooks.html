@@ -125,6 +125,15 @@
 		            </th:block>
 		        </div>
 		    </div>
+		    
+		    <!-- Phần hiển thị thông báo -->
+			<div th:if="${message}" class="mb-3">
+			    <div class="alert rounded-lg font-weight-bold" th:classappend="${message.contains('thành công') ? 'alert-success' : 'alert-danger'}">
+			        <span th:text="${message}"></span>
+			    </div>
+			</div>
+
+
 		
 		    <table class="table table-striped table-bordered">
 		        <thead class="thead-title">

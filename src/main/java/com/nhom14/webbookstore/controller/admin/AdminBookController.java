@@ -78,6 +78,9 @@ public class AdminBookController {
         
         if (searchKeyword != null && !searchKeyword.isEmpty()) {
             books = bookService.searchBooksByKeyword(books, searchKeyword);
+            if(books.isEmpty()) {
+            	model.addAttribute("message", "Không tìm thấy kết quả tương ứng với từ khóa");
+            }
         }
         
         totalBooks = books.size();
